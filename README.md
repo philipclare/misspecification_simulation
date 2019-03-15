@@ -9,7 +9,7 @@ Analysis code runs all analyses on those datasets, and saves the results. Note t
 | Description | Code |
 | --- | --- |
 | S1 - Data creation - Stata Code | [Data creation code](Code/S1_data_creation.do) |
-| S2 - Analysis - R Code | [Analysis code](Code/S2_analysis.code) |
+| S2 - Analysis - R Code | [Analysis code](Code/S2_analysis_code.R) |
 
 
 
