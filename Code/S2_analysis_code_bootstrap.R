@@ -8,27 +8,6 @@ if (any(missing)) {
   install.packages(libs[missing])
 }
 
-library("nnls")
-library("SuperLearner")
-library("Matrix")
-library("foreach")
-library("glmnet")
-library("ranger")
-library("lme4")
-library("geepack")
-library("parallel")
-library("doParallel")
-library("boot")
-library("haven")
-library("ggplot2")
-library("multcomp")
-library("doBy")
-library("gam")
-library("future")
-library("stats")
-library("data.table")
-library("optimx")
-
 load(file="data.RData")
 
 bootdata <- function(d) {
