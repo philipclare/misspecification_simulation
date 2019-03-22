@@ -1021,8 +1021,8 @@ results2 <- data.frame(matrix(unlist(parLapply(cl,data[251:500], function (x) {s
 end2 <- Sys.time()
 end2-start2
 
-results<-rbind(results1,results2)
-save(results,file="results.RData")
+resultsA<-rbind(results1,results2)
+save(resultsA,file="resultsA.RData")
 resultsA1<-results[,c(1:6,13:18,25:30,37:42,49:54,61:66,67:72,91:96,115:120,121:126,133:138,145:150,151:156,175,180,199:204,205:210,229:234,253:258)]
 colnames(resultsA1) <- col.names
 save(resultsA1,file="resultsA1.RData")

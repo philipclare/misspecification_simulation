@@ -48,7 +48,7 @@ compestimates <- function(data) {
                         glfy10=(predict(GLout,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=1,a=0),type="response")*GLlprop$l1) + (predict(GLout,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=1,a=0),type="response")*(1-GLlprop$l1)),
                         glfy01=(predict(GLout,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=0,a=1),type="response")*GLlprop$l0) + (predict(GLout,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=0,a=1),type="response")*(1-GLlprop$l0)),
                         glfy11=(predict(GLout,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=1,a=1),type="response")*GLlprop$l1) + (predict(GLout,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=1,a=1),type="response")*(1-GLlprop$l1)))
-
+  
   # Incorrectly specified GLM G-computation
   GLoutm <- glm(formula=outmodelm,D,family=gaussian)
   GLgcmpdm <- data.frame(id=D$id,obs=D$obs,
@@ -57,7 +57,7 @@ compestimates <- function(data) {
                          glfy10=(predict(GLoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=1,a=0),type="response")*GLlprop$l1) + (predict(GLoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=1,a=0),type="response")*(1-GLlprop$l1)),
                          glfy01=(predict(GLoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=0,a=1),type="response")*GLlprop$l0) + (predict(GLoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=0,a=1),type="response")*(1-GLlprop$l0)),
                          glfy11=(predict(GLoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=1,a=1),type="response")*GLlprop$l1) + (predict(GLoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=1,a=1),type="response")*(1-GLlprop$l1)))
-
+  
   # Correctly specified Random-intercept G-computation
   RIlp <- glmer(l~la+ll+oa+ob+oc+(1|id),data=D,family="binomial",nAGQ=15,control=glmercont)
   RIlprop <- data.frame(cbind(l0=predict(RIlp,newdata=data.frame(D[,c(-5,-6)],la=0),type="response"),l1=predict(RIlp,newdata=data.frame(D[,c(-5,-6)],la=1),type="response")))
@@ -68,7 +68,7 @@ compestimates <- function(data) {
                         mlfy10=(predict(RIout,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=1,a=0),type="response")*RIlprop$l1) + (predict(RIout,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=0,a=0),type="response")*(1-RIlprop$l1)),
                         mlfy01=(predict(RIout,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=0,a=1),type="response")*RIlprop$l0) + (predict(RIout,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=0,a=1),type="response")*(1-RIlprop$l0)),
                         mlfy11=(predict(RIout,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=1,a=1),type="response")*RIlprop$l1) + (predict(RIout,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=1,a=1),type="response")*(1-RIlprop$l1)))
-
+  
   # Correctly specified Random-intercept G-computation
   RIoutm <- lmer(formula=paste0(outmodelm,"+(1|id)"),D)
   RIgcmpdm <- data.frame(id=D$id,obs=D$obs,
@@ -77,7 +77,7 @@ compestimates <- function(data) {
                          mlfy10=(predict(RIoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=1,a=0),type="response")*RIlprop$l1) + (predict(RIoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=0,a=0),type="response")*(1-RIlprop$l1)),
                          mlfy01=(predict(RIoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=0,a=1),type="response")*RIlprop$l0) + (predict(RIoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=0,a=1),type="response")*(1-RIlprop$l0)),
                          mlfy11=(predict(RIoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=1,la=1,a=1),type="response")*RIlprop$l0) + (predict(RIoutm,newdata=data.frame(D[,c(-4,-5,-6)],l=0,la=1,a=1),type="response")*(1-RIlprop$l0)))
-
+  
   # SuperLearner G-computation  
   SLlp <- SuperLearner(Y=as.vector(D$l),X=D[,c(-1,-3,-4,-6)],id=I,SL.library=SLlib,family=binomial)
   SLlprop <- data.frame(cbind(l0=as.vector(predict(SLlp,newdata=data.frame(D[,c(-3,-4,-5,-6)],la=0))$pred),l1=as.vector(predict(SLlp,newdata=data.frame(D[,c(-3,-4,-5,-6)],la=1))$pred)))
@@ -88,7 +88,7 @@ compestimates <- function(data) {
                         slfy10=(as.vector(predict(SLout,newdata=data.frame(D1[,c(-2,-3,-4)],l=1,la=1,a=0))$pred)*SLlprop$l1) + (as.vector(predict(SLout,newdata=data.frame(D1[,c(-2,-3,-4)],l=0,la=0,a=0))$pred)*(1-SLlprop$l1)),
                         slfy01=(as.vector(predict(SLout,newdata=data.frame(D1[,c(-2,-3,-4)],l=1,la=0,a=1))$pred)*SLlprop$l0) + (as.vector(predict(SLout,newdata=data.frame(D1[,c(-2,-3,-4)],l=0,la=0,a=1))$pred)*(1-SLlprop$l0)),
                         slfy11=(as.vector(predict(SLout,newdata=data.frame(D1[,c(-2,-3,-4)],l=1,la=1,a=1))$pred)*SLlprop$l1) + (as.vector(predict(SLout,newdata=data.frame(D1[,c(-2,-3,-4)],l=0,la=1,a=1))$pred)*(1-SLlprop$l1)))
-
+  
   # Correctly specified GLM IPTW
   GLexp0 <- glm(formula=propa0model,data=D,family=binomial)
   GLexp1 <- glm(formula=propa1model,data=D,family=binomial)
@@ -451,7 +451,7 @@ sim <- function(data) {
   GEEm <- geeglm(formula(outmodelm),data=data,id=data$id,waves=data$obs,family=gaussian)
   
   SL.est <- compestimates(data=data)
-
+  
   results1 <- matrix(ncol = 36)
   
   results1[1]<-coef(summary(GLM))[2,1]
@@ -513,10 +513,9 @@ col.names <- c("GLMaco","GLMase","GLMlaco","GLMlase","GLMjtco","GLMjtse",
                "RItmleaco","RItmlease","RItmlelaco","RItmlelase","RItmlejtco","RItmlejtse",
                "SLtmleaco","SLtmlease","SLtmlelaco","SLtmlelase","SLtmlejtco","SLtmlejtse")
 
-numcores <- future::availableCores()-1
-cl <- makeCluster(numcores)
-parallel::clusterEvalQ(cl, cloudstor <- "C:/Users/z3312911/Cloudstor/")
-parallel::clusterEvalQ(cl, .libPaths(paste0(cloudstor,"R Library")))
+numcores <- future::availableCores()
+cl <- makeCluster(numcores, type="FORK")
+parallel::clusterEvalQ(cl, .libPaths("~/RPackages"))
 parallel::clusterEvalQ(cl, library("nnls"))
 parallel::clusterEvalQ(cl, library("SuperLearner"))
 parallel::clusterEvalQ(cl, library("Matrix"))
@@ -551,24 +550,18 @@ results2 <- data.frame(matrix(unlist(parLapply(cl,data[251:500], function (x) {s
 end2 <- Sys.time()
 end2-start2
 
-results<-rbind(results1,results2)
-save(results,file="results.RData")
-resultsA1<-results[,c(1:6,13:18,25:30,37:42,49:54,61:66,67:72,91:96,115:120,121:126,145:150,169:174)]
-colnames(resultsA1) <- col.names
-save(resultsA1,file="resultsA1.RData")
-resultsA2<-results[,c(1:6,13:18,25:30,43:48,55:60,61:66,73:78,97:102,115:120,127:132,151:156,169:174)]
-colnames(resultsA2) <- col.names
-save(resultsA2,file="resultsA2.RData")
-resultsA3<-results[,c(7:12,19:24,31:36,37:42,49:54,61:66,79:84,103:108,115:120,133:138,157:162,169:174)]
-colnames(resultsA3) <- col.names
-save(resultsA3,file="resultsA3.RData")
-resultsA4<-results[,c(7:12,19:24,31:36,43:48,55:60,61:66,85:90,109:114,115:120,139:144,163:168,169:174)]
-colnames(resultsA4) <- col.names
-save(resultsA4,file="resultsA4.RData")
-
-write_dta(resultsA1,paste0(cloudstor,"PhD/Paper 3 - Methods simulation/Results/ResultsB1.dta"))
-write_dta(resultsA2,paste0(cloudstor,"PhD/Paper 3 - Methods simulation/Results/ResultsB2.dta"))
-write_dta(resultsA3,paste0(cloudstor,"PhD/Paper 3 - Methods simulation/Results/ResultsB3.dta"))
-write_dta(resultsA4,paste0(cloudstor,"PhD/Paper 3 - Methods simulation/Results/ResultsB4.dta"))
-
+resultsB<-rbind(results1,results2)
+save(resultsB,file="resultsB.RData")
+resultsB1<-results[,c(1:6,13:18,25:30,37:42,49:54,61:66,67:72,91:96,115:120,121:126,145:150,169:174)]
+colnames(resultsB1) <- col.names
+save(resultsB1,file="resultsB1.RData")
+resultsB2<-results[,c(1:6,13:18,25:30,43:48,55:60,61:66,73:78,97:102,115:120,127:132,151:156,169:174)]
+colnames(resultsB2) <- col.names
+save(resultsB2,file="resultsB2.RData")
+resultsB3<-results[,c(7:12,19:24,31:36,37:42,49:54,61:66,79:84,103:108,115:120,133:138,157:162,169:174)]
+colnames(resultsB3) <- col.names
+save(resultsB3,file="resultsB3.RData")
+resultsB4<-results[,c(7:12,19:24,31:36,43:48,55:60,61:66,85:90,109:114,115:120,139:144,163:168,169:174)]
+colnames(resultsB4) <- col.names
+save(resultsB4,file="resultsB4.RData")
 
