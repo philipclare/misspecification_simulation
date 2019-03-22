@@ -1,4 +1,4 @@
-# Comparison of methods for adjusting for exposure-affected time-varying confounding under misspecification – Monte-Carlo Simulations
+# Comparison of methods for adjusting for exposure-affected time-varying confounding under misspecification â€“ Monte-Carlo Simulations
 ## Stata and R Analysis Code
 
 This repository contains the Stata and R code used in the misspecification simulation by Clare et al. 2019
@@ -8,8 +8,8 @@ Analysis code runs all analyses on those datasets, and saves the results. Note t
 
 | Description | Code |
 | --- | --- |
-| S1 - Data creation - Stata Code | [Data creation code](Code/S1_data_creation.do) |
-| S2 - Analysis - R Code | [Analysis code](Code/S2_analysis_code.R) |
-
+| S1 - Data creation Stata Code | [Data creation code](Code/S1_data_creation.do) |
+| S2 - Analysis with bootstrap SEs - R Code | [Analysis code - Bootstrap](Code/S2_analysis_code_bootstrap.R) |
+| S2 - Analysis with model-based/influence curve SEs - R Code | [Analysis code - Alternative](Code/S3_analysis_code_IC.R) |
 
 
